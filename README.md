@@ -1,23 +1,32 @@
 # Agentic RAG PDF Chatbot
 
-A powerful chatbot application that uses RAG (Retrieval Augmented Generation) to intelligently answer questions about uploaded PDF documents. The system combines the power of LangChain, OpenAI's GPT models, and vector storage to provide accurate, context-aware responses.
+<div align="center">
+
+![Chatbot Banner](docs\banner.webp)
+
+A powerful chatbot application that uses Agentic RAG (Retrieval Augmented Generation) to intelligently answer questions about uploaded PDF documents. The system combines the power of LangChain, OpenAI's GPT models, and vector storage to provide accurate, context-aware responses.
+
+[Features](#features) • [Technology Stack](#technology-stack) • [API Documentation](#api-documentation) • [Setup](#setup--installation) • [Usage](#usage) • [Security](#security)
+
+</div>
 
 ## Features
 
 - 📄 PDF Document Upload & Processing
 - 💬 Interactive Chat Interface
-- 🔍 Intelligent Document Search
+- 🔍 Intelligent Document Search using RAG
 - 🧠 Context-Aware Responses
 - 📊 Conversation History Management
 - 🎭 Customizable Assistant Personalities
-- 🔗 Source Citations & References
+- 🔒 Secure Document Handling
+- 🚀 RESTful API Architecture
 
 ## Technology Stack
 
 ### Backend
 - FastAPI - Modern web framework for building APIs
 - LangChain - Framework for developing applications powered by language models
-- OpenAI GPT-4 - Advanced language model for generating responses
+- OpenAI GPT-4o - Advanced language model for generating responses
 - FAISS - Vector storage for efficient document retrieval
 - PyPDF - PDF document processing
 
@@ -25,40 +34,73 @@ A powerful chatbot application that uses RAG (Retrieval Augmented Generation) to
 - Streamlit - Interactive web interface
 - Python Requests - HTTP client for API communication
 
-## Project Structure
+## API Documentation
 
+The backend provides a RESTful API with the following endpoints:
+
+### Conversation Management
+
+#### Create New Conversation
+```http
+POST /conversations/new
 ```
-├── backend/
-│   ├── api/
-│   │   ├── __init__.py
-│   │   ├── routes/
-│   │   │   ├── chat.py
-│   │   │   ├── conversations.py
-│   │   │   └── documents.py
-│   │   └── models/
-│   │       └── schemas.py
-│   ├── core/
-│   │   ├── config.py
-│   │   └── security.py
-│   ├── services/
-│   │   ├── conversation.py
-│   │   ├── document.py
-│   │   └── chat.py
-│   └── utils/
-│       └── helpers.py
-├── frontend/
-│   ├── app.py
-│   ├── config.py
-│   └── components/
-│       ├── chat.py
-│       └── document_upload.py
-├── config/
-│   └── settings.py
-└── docker/
-    ├── backend.Dockerfile
-    ├── frontend.Dockerfile
-    └── docker-compose.yml
+Creates a new conversation session and returns a unique conversation ID.
+
+**Response:**
+```json
+{
+    "conversation_id": "uuid-string",
+    "message": "New conversation created successfully"
+}
 ```
+
+#### Upload Documents
+```http
+POST /conversations/{conversation_id}/upload
+```
+Upload PDF documents for processing in a specific conversation.
+
+**Parameters:**
+- `conversation_id` (path): UUID of the conversation
+- `files` (form-data): List of PDF files to upload
+
+**Response:**
+```json
+{
+    "message": "Documents uploaded and processed successfully."
+}
+```
+
+#### Chat with Documents
+```http
+POST /conversations/{conversation_id}/chat
+```
+Send a question and receive an AI-generated response based on the uploaded documents.
+
+**Request Body:**
+```json
+{
+    "question": "Your question here",
+    "assistant_name": "AI Assistant",
+    "assistant_behavior": "Professional",
+    "custom_instructions": ""
+}
+```
+
+**Response:**
+```json
+{
+    "answer": "AI-generated response based on document context"
+}
+```
+
+### Additional Endpoints
+
+- `GET /conversations` - List all conversations
+- `GET /conversations/{conversation_id}/history` - Get chat history
+- `GET /conversations/{conversation_id}/files` - List uploaded files
+- `GET /health` - API health check
+- `POST /conversations/{conversation_id}/load` - Load conversation documents
 
 ## Setup & Installation
 
@@ -72,7 +114,6 @@ cd pdf-chatbot
 Create a `.env` file in the root directory with the following variables:
 ```env
 OPENAI_API_KEY=your_openai_api_key
-BACKEND_URL=http://localhost:8000
 ```
 
 3. Using Docker (Recommended):
@@ -100,17 +141,18 @@ streamlit run app.py
 
 1. Access the web interface at `http://localhost:8501`
 2. Upload PDF documents using the sidebar
-3. Start chatting with the bot about your documents
-4. View source citations and references in the expandable sections
+3. Set the custom behaviour of the chatbot as wanted (Optional)
+4. Start chatting with the bot about your documents
 5. Clear conversations using the "Clear Conversation" button
 
-## Configuration
+<div align="center">
 
-The application can be configured through various settings:
+### Chatbot Interface
 
-- `config/settings.py` - Core application settings
-- `.env` - Environment variables and API keys
-- `.streamlit/config.toml` - Streamlit-specific configurations
+![Chatbot Interface Screenshot](docs/chatbot-ui-screenshot.png)
+*Interactive chat interface with document upload and customizable assistant behavior*
+
+</div>
 
 ## Development
 
@@ -127,11 +169,19 @@ To contribute to the project:
 - Document storage is temporary and session-based
 - Secure file handling and validation
 - Rate limiting on API endpoints
+- Input sanitization and validation
+- CORS policy implementation
+- Regular security updates and dependency scanning
 
 ## License
 
-[Your License Here]
+MIT License
+
+Copyright (c) 2025 Mostafa Ghaith
+
 
 ## Contact
 
-[Your Contact Information]
+Mostafa Ghaith\
+linkedin.com/in/mostafa-ghaith\
+github.com/mostafa-ghaith
