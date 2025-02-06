@@ -106,8 +106,8 @@ Send a question and receive an AI-generated response based on the uploaded docum
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/pdf-chatbot.git
-cd pdf-chatbot
+git clone https://github.com/mostafa-ghaith/agentic-rag-app.git
+cd agentic-rag-app
 ```
 
 2. Set up environment variables:
