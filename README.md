@@ -140,10 +140,11 @@ streamlit run app.py
 ## Usage
 
 1. Access the web interface at `http://localhost:8501`
-2. Upload PDF documents using the sidebar
+2. Upload PDF documents using the sidebar and click on "Process Documents"
 3. Set the custom behaviour of the chatbot as wanted (Optional)
 4. Start chatting with the bot about your documents
-5. Clear conversations using the "Clear Conversation" button
+5. You can navigate to previous conversations and continue them from the sidebar
+
 
 <div align="center">
 
