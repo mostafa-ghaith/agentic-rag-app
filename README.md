@@ -2,7 +2,7 @@
 
 <div align="center">
 
-![Chatbot Banner](docs\banner.png)
+![Chatbot Banner](docs/banner.png)
 
 A powerful chatbot application that uses Agentic RAG (Retrieval Augmented Generation) to intelligently answer questions about uploaded PDF documents. The system combines the power of LangChain, OpenAI's GPT models, and vector storage to provide accurate, context-aware responses.
 
